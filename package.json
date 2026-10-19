@@ -1,6 +1,6 @@
 {
   "name": "@tensei-group/release",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Tensei Group shareable semantic-release config for conventional commits",
   "license": "MIT",
   "main": "index.js",

@@ -1,5 +1,20 @@
 # @tensei-group/release changelog
 
+> Each release is a small transformation. Taking what exists and giving it a new life.
+
+All notable changes to this project will be documented in this file
+
+## [1.1.0](https://github.com/TenseiGroup/release/compare/v1.0.0...v1.1.0) (2026-10-19)
+
+### New
+
+* tensei release voice for changelogs and release notes ([43ea449](https://github.com/TenseiGroup/release/commit/43ea4497e35b8cc9927b11b095c9c5f1ea05cb9d))
+
+
+— 転生
+
+# @tensei-group/release changelog
+
 > All notable changes to this project will be documented in this file
 
 ## 1.0.0 (2026-10-19)
