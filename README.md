@@ -14,6 +14,10 @@ Forked from [`open-sauced/semantic-release-conventional-config`](https://github.
 
 Each release: analyzes commits, generates a changelog, bumps `package.json`, commits `CHANGELOG.md` + `package.json` + lockfile, and creates a GitHub release. No npm publish; these are applications.
 
+## Release voice
+
+The upstream config announces with emoji (🍕 Features). Tensei releases are quieter, per the brand: minimal section names (**New / Fixes / Performance / Refactoring / Reverts**), chore-level commits hidden from output, a one-line tagline in the changelog header, and a single `— 転生` signature at the end of each release entry. Release commits read `chore(release): vX.Y.Z [skip ci]`.
+
 ## Setup in a project
 
 1. Install:

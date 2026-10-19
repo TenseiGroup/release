@@ -1,5 +1,6 @@
 const { existsSync, readFileSync } = require("node:fs");
 const { sync } = require("node:child_process");
+const { dirname, join } = require("node:path");
 
 const plugins = [];
 const noteKeywords = ["BREAKING CHANGE", "BREAKING CHANGES", "BREAKING"];
@@ -58,25 +59,35 @@ addPlugin("@semantic-release/commit-analyzer", {
   parserOpts: { noteKeywords },
 });
 
+// The conventionalcommits main template never renders the footer partial,
+// so append the footer slot to it and sign each entry quietly.
+const presetDir = join(dirname(require.resolve("conventional-changelog-conventionalcommits")), "..");
+const mainTemplate =
+  readFileSync(join(presetDir, "src/templates/template.hbs"), "utf8") +
+  "\n{{> footer}}\n";
+
 addPlugin("@semantic-release/release-notes-generator", {
   preset: "conventionalcommits",
   parserOpts: { noteKeywords },
   writerOpts: {
     commitsSort: ["scope", "subject"],
+    mainTemplate,
+    footerPartial: "\n— 転生\n",
   },
   presetConfig: {
     types: [
-      { type: "feat", section: "Features" },
-      { type: "feature", section: "Features" },
-      { type: "fix", section: "Bug Fixes" },
-      { type: "perf", section: "Performance Improvements" },
+      { type: "feat", section: "New" },
+      { type: "feature", section: "New" },
+      { type: "fix", section: "Fixes" },
+      { type: "perf", section: "Performance" },
       { type: "revert", section: "Reverts" },
-      { type: "docs", section: "Documentation" },
-      { type: "style", section: "Styles" },
-      { type: "refactor", section: "Code Refactoring" },
-      { type: "test", section: "Tests" },
-      { type: "build", section: "Build System" },
-      { type: "ci", section: "Continuous Integration" },
+      { type: "refactor", section: "Refactoring" },
+      { type: "docs", section: "Docs", hidden: true },
+      { type: "style", section: "Styles", hidden: true },
+      { type: "test", section: "Tests", hidden: true },
+      { type: "build", section: "Build System", hidden: true },
+      { type: "ci", section: "Continuous Integration", hidden: true },
+      { type: "chore", section: "Chores", hidden: true },
     ],
   },
 });
@@ -88,7 +99,9 @@ try {
   if (pkg.name) {
     changelogTitle = `# ${pkg.name} changelog
 
-> All notable changes to this project will be documented in this file`;
+> Each release is a small transformation. Taking what exists and giving it a new life.
+
+All notable changes to this project will be documented in this file`;
   }
 } catch {
   // Keep the default title.
@@ -105,10 +118,7 @@ if (existsSync("bun.lock")) gitAssets.push("bun.lock");
 
 addPlugin("@semantic-release/git", {
   assets: gitAssets,
-  message:
-    "chore(<%= nextRelease.type %>): release <%= nextRelease.version %>" +
-    "<%= nextRelease.channel !== null ? ` on ${nextRelease.channel} channel` : '' %> [skip ci]\n\n" +
-    "<%= nextRelease.notes %>",
+  message: "chore(release): v<%= nextRelease.version %> [skip ci]",
 });
 
 addPlugin("@semantic-release/github", {
