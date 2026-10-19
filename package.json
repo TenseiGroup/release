@@ -1,0 +1,50 @@
+{
+  "name": "@tensei-group/release",
+  "version": "0.0.0-development",
+  "description": "Tensei Group shareable semantic-release config for conventional commits",
+  "license": "MIT",
+  "main": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "keywords": [
+    "semantic-release",
+    "conventional-commits",
+    "release",
+    "tensei-group"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/TenseiGroup/release.git"
+  },
+  "bugs": {
+    "url": "https://github.com/TenseiGroup/release/issues"
+  },
+  "homepage": "https://github.com/TenseiGroup/release#readme",
+  "engines": {
+    "node": ">=20.8.1"
+  },
+  "scripts": {
+    "release": "semantic-release",
+    "release:dry": "semantic-release --dry-run"
+  },
+  "peerDependencies": {
+    "semantic-release": ">=22.0.0"
+  },
+  "dependencies": {
+    "@semantic-release/changelog": "^7.0.0",
+    "@semantic-release/commit-analyzer": "^13.0.1",
+    "@semantic-release/exec": "^7.1.0",
+    "@semantic-release/git": "^11.0.1",
+    "@semantic-release/github": "^12.0.10",
+    "@semantic-release/npm": "^13.2.0",
+    "@semantic-release/release-notes-generator": "^14.1.1",
+    "conventional-changelog-conventionalcommits": "^10.4.1"
+  },
+  "devDependencies": {
+    "semantic-release": "^25.0.9"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
