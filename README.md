@@ -66,6 +66,15 @@ The upstream config announces with emoji (🍕 Features). Tensei releases are qu
 - `main` — stable releases
 - `beta`, `alpha` — pre-release channels
 
+## Release branches
+
+Never rewrite history on a release branch (`main`/`beta`). semantic-release numbers
+versions by finding the previous release tag in the branch's history; a force-push or
+rebase orphans the tagged commit and prerelease numbering restarts (v2.9.0-alpha.1,
+v2.9.0-alpha.1, ...). Always merge into release branches, never rebase them. If it
+already happened, re-attach the channel note: `git notes --ref semantic-release-<tag>
+add -f -m '{"channels":["<branch>"]}' <tag>` then push the notes ref.
+
 ## Used by
 
 - [credix-web](https://github.com/takanome-dev/credix-web)
